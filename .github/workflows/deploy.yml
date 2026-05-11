@@ -63,15 +63,15 @@ jobs:
           echo "========================================"
           
           # Create project directory if not exists
-          mkdir -p /var/www/cosens
-          cd /var/www/cosens
+          mkdir -p /var/www/watertank
+          cd /var/www/watertank
           
           # Create backup if directory is not empty
           if [ "$(ls -A . 2>/dev/null | grep -v 'tmp\|backup' | wc -l)" -gt 0 ]; then
             echo "Creating backup..."
             BACKUP_DIR="/var/www/backups"
             mkdir -p $BACKUP_DIR
-            BACKUP_FILE="$BACKUP_DIR/cosens-backup-$(date +%Y%m%d-%H%M%S).tar.gz"
+            BACKUP_FILE="$BACKUP_DIR/watertank-backup-$(date +%Y%m%d-%H%M%S).tar.gz"
             tar -czf "$BACKUP_FILE" . \
               --exclude='tmp' \
               --exclude='storage/logs' \
@@ -83,14 +83,14 @@ jobs:
             echo "Backup created: $BACKUP_FILE"
             
             # Clean old backups (keep last 5)
-            cd $BACKUP_DIR && ls -t cosens-backup-*.tar.gz 2>/dev/null | tail -n +6 | xargs -r rm 2>/dev/null || true
-            cd /var/www/cosens
+            cd $BACKUP_DIR && ls -t watertank-backup-*.tar.gz 2>/dev/null | tail -n +6 | xargs -r rm 2>/dev/null || true
+            cd /var/www/watertank
           fi
           
           # Save important files before extraction
           echo "Saving configuration files..."
-          [ -f ".env" ] && cp .env /tmp/cosens-env-backup
-          [ -d "storage" ] && cp -r storage /tmp/cosens-storage-backup
+          [ -f ".env" ] && cp .env /tmp/watertank-env-backup
+          [ -d "storage" ] && cp -r storage /tmp/watertank-storage-backup
           
           # Extract new files
           echo "Extracting new files..."
@@ -99,8 +99,8 @@ jobs:
           
           # Restore configuration files
           echo "Restoring configuration..."
-          [ -f "/tmp/cosens-env-backup" ] && cp /tmp/cosens-env-backup .env
-          [ -d "/tmp/cosens-storage-backup" ] && cp -r /tmp/cosens-storage-backup/* storage/ 2>/dev/null || true
+          [ -f "/tmp/watertank-env-backup" ] && cp /tmp/watertank-env-backup .env
+          [ -d "/tmp/watertank-storage-backup" ] && cp -r /tmp/watertank-storage-backup/* storage/ 2>/dev/null || true
           
           # Ensure .env exists
           if [ ! -f ".env" ]; then
@@ -112,10 +112,10 @@ jobs:
           # Set correct permissions
           echo "Setting permissions..."
           # Use root as web user (adjust if your server uses nginx/apache user)
-          chown -R root:root /var/www/cosens || true
-          chmod -R 755 /var/www/cosens
-          chmod -R 775 /var/www/cosens/storage 2>/dev/null || true
-          chmod -R 775 /var/www/cosens/bootstrap/cache 2>/dev/null || true
+          chown -R root:root /var/www/watertank || true
+          chmod -R 755 /var/www/watertank
+          chmod -R 775 /var/www/watertank/storage 2>/dev/null || true
+          chmod -R 775 /var/www/watertank/bootstrap/cache 2>/dev/null || true
           
           # Install dependencies if composer.json exists
           if [ -f "composer.json" ]; then
@@ -140,8 +140,8 @@ jobs:
           systemctl restart php8.3-fpm 2>/dev/null || true
           
           # Cleanup
-          rm -f /tmp/cosens-env-backup
-          rm -rf /tmp/cosens-storage-backup
+          rm -f /tmp/watertank-env-backup
+          rm -rf /tmp/watertank-storage-backup
           
           echo ""
           echo "========================================"
@@ -149,6 +149,6 @@ jobs:
           echo "  Time: $(date)"
           echo "========================================"
           echo ""
-          echo "Website: https://cosens.cn"
-          echo "Admin: https://cosens.cn/admin"
+          echo "Website: https://watertank.cosens.cn"
+          echo "Admin: https://watertank.cosens.cn/admin"
 
