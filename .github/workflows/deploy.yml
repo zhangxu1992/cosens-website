@@ -122,7 +122,16 @@ jobs:
           # Install dependencies if composer.json exists
           if [ -f "composer.json" ]; then
             echo "Installing PHP dependencies..."
-            composer install --no-dev --optimize-autoloader --no-interaction 2>/dev/null || echo "Composer install skipped (may not be needed)"
+            # Check if composer is available
+            if command -v composer &> /dev/null; then
+              composer install --no-dev --optimize-autoloader --no-interaction
+            else
+              echo "Composer not found, downloading..."
+              php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+              php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+              rm composer-setup.php
+              composer install --no-dev --optimize-autoloader --no-interaction
+            fi
           fi
           
           # Optimize Laravel if artisan exists
