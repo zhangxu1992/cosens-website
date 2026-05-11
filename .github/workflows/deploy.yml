@@ -22,16 +22,19 @@ jobs:
     - name: Prepare Deployment Files
       run: |
         # Create deployment archive with all project files
-        tar -czf deploy.tar.gz \
+        # Output to /tmp/ to avoid tar including the archive itself
+        tar -czf /tmp/deploy.tar.gz \
           --exclude='.git' \
           --exclude='node_modules' \
           --exclude='.github' \
           --exclude='cosens-deploy.zip' \
-          --exclude='deploy.tar.gz' \
           .
         
         echo "Archive created successfully"
-        ls -lh deploy.tar.gz
+        ls -lh /tmp/deploy.tar.gz
+        
+        # Move to workspace for upload
+        mv /tmp/deploy.tar.gz deploy.tar.gz
 
     - name: Deploy to Server via SSH
       uses: appleboy/scp-action@v0.1.7
