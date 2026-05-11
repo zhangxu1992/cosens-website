@@ -111,10 +111,11 @@ jobs:
           
           # Set correct permissions
           echo "Setting permissions..."
-          chown -R www-data:www-data /var/www/cosens
+          # Use root as web user (adjust if your server uses nginx/apache user)
+          chown -R root:root /var/www/cosens || true
           chmod -R 755 /var/www/cosens
-          chmod -R 775 /var/www/cosens/storage
-          chmod -R 775 /var/www/cosens/bootstrap/cache
+          chmod -R 775 /var/www/cosens/storage 2>/dev/null || true
+          chmod -R 775 /var/www/cosens/bootstrap/cache 2>/dev/null || true
           
           # Install dependencies if composer.json exists
           if [ -f "composer.json" ]; then
