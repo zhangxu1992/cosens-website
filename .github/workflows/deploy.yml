@@ -148,11 +148,3 @@ jobs:
           echo "Website: https://cosens.cn"
           echo "Admin: https://cosens.cn/admin"
 
-    - name: Notify Deployment Status
-      if: always()
-      uses: 8398a7/action-slack@v3
-      with:
-        status: ${{ job.status }}
-        text: ${{ job.status == 'success' && '🚀 Cosens website deployed successfully!' || '❌ Cosens website deployment failed!' }}
-        webhook_url: ${{ secrets.SLACK_WEBHOOK }}
-      continue-on-error: true
