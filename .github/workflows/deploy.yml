@@ -27,6 +27,7 @@ jobs:
           --exclude='node_modules' \
           --exclude='.github' \
           --exclude='cosens-deploy.zip' \
+          --exclude='deploy.tar.gz' \
           .
         
         echo "Archive created successfully"
