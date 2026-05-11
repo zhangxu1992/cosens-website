@@ -137,7 +137,7 @@ jobs:
           # Restart services
           echo "Restarting services..."
           systemctl reload nginx 2>/dev/null || true
-          systemctl restart php8.3-fpm 2>/dev/null || true
+          systemctl restart php8.2-fpm 2>/dev/null || true
           
           # Cleanup
           rm -f /tmp/watertank-env-backup
