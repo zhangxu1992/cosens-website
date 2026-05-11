@@ -1,0 +1,59 @@
+Cosens Website - 项目文件清单
+================================
+
+项目路径: /var/www/cosens
+服务器: 1.14.163.66
+域名: cosens.cn
+
+【配置文件】
+├── composer.json           # PHP依赖配置
+├── .env.example            # 环境配置模板
+├── nginx.conf              # Nginx服务器配置
+├── config/languages.php    # 10国语言配置
+
+【部署脚本】
+├── install.sh              # 服务器环境安装脚本
+├── deploy.sh               # 项目部署脚本
+├── server-setup.sh         # 完整服务器配置脚本
+
+【文档】
+├── README.md               # 项目说明
+├── DEPLOY.md               # 详细部署指南
+├── OVERVIEW.md             # 项目概览
+└── FILE-LIST.txt           # 本文件
+
+【数据模型】app/Models/
+├── Category.php            # 分类模型
+├── Product.php             # 产品模型
+├── Post.php                # 文章模型
+├── CaseStudy.php           # 案例模型
+├── Inquiry.php             # 询盘模型
+├── Quotation.php           # 报价模型
+├── Page.php                # 页面模型
+└── Setting.php             # 设置模型
+
+【数据库迁移】database/migrations/
+├── 2025_05_09_000001_create_categories_table.php
+├── 2025_05_09_000002_create_products_table.php
+├── 2025_05_09_000003_create_posts_table.php
+├── 2025_05_09_000004_create_cases_table.php
+├── 2025_05_09_000005_create_inquiries_table.php
+├── 2025_05_09_000006_create_quotations_table.php
+├── 2025_05_09_000007_create_pages_table.php
+└── 2025_05_09_000008_create_settings_table.php
+
+【路由】
+└── routes/web.php          # Web路由定义
+
+【语言包】
+└── resources/lang/zh_CN/messages.php
+
+================================
+安装步骤:
+1. 上传所有文件到服务器 /var/www/cosens
+2. 运行: bash install.sh     # 安装环境
+3. 运行: bash deploy.sh      # 部署项目
+4. 访问: https://cosens.cn
+
+后台地址: https://cosens.cn/admin
+================================
