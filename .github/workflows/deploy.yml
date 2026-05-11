@@ -119,6 +119,13 @@ jobs:
           chmod -R 775 /www/wwwroot/watertank.cosens.cn/storage 2>/dev/null || true
           mkdir -p /www/wwwroot/watertank.cosens.cn/bootstrap/cache
           chmod -R 775 /www/wwwroot/watertank.cosens.cn/bootstrap/cache 2>/dev/null || true
+          mkdir -p /www/wwwroot/watertank.cosens.cn/storage/framework/cache
+          mkdir -p /www/wwwroot/watertank.cosens.cn/storage/framework/sessions
+          mkdir -p /www/wwwroot/watertank.cosens.cn/storage/framework/views
+          mkdir -p /www/wwwroot/watertank.cosens.cn/storage/framework/testing
+          mkdir -p /www/wwwroot/watertank.cosens.cn/storage/logs
+          mkdir -p /www/wwwroot/watertank.cosens.cn/storage/app/public
+          chmod -R 775 /www/wwwroot/watertank.cosens.cn/storage 2>/dev/null || true
           
           # Install dependencies if composer.json exists
           if [ -f "composer.json" ]; then
