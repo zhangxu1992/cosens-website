@@ -111,9 +111,11 @@ jobs:
           
           # Set correct permissions
           echo "Setting permissions..."
+          # Remove immutable attribute from .user.ini (created by Baota)
+          chattr -i /www/wwwroot/watertank.cosens.cn/.user.ini 2>/dev/null || true
           # Use root as web user (adjust if your server uses nginx/apache user)
           chown -R root:root /www/wwwroot/watertank.cosens.cn || true
-          chmod -R 755 /www/wwwroot/watertank.cosens.cn
+          chmod -R 755 /www/wwwroot/watertank.cosens.cn || true
           chmod -R 775 /www/wwwroot/watertank.cosens.cn/storage 2>/dev/null || true
           chmod -R 775 /www/wwwroot/watertank.cosens.cn/bootstrap/cache 2>/dev/null || true
           
