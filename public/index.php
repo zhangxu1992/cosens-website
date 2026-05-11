@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 
 // Determine if the application is in maintenance mode...
 $maintenance = __DIR__.'/../storage/framework/maintenance.php';
