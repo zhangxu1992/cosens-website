@@ -10,6 +10,7 @@
         "laravel/tinker": "^2.10",
         "filament/filament": "^3.3",
         "filament/spatie-laravel-media-library-plugin": "^3.3",
+        "filament/spatie-laravel-translatable-plugin": "^3.3",
         "livewire/livewire": "^3.6",
         "spatie/laravel-permission": "^6.16",
         "spatie/laravel-translatable": "^6.11",

@@ -6,6 +6,7 @@ use App\Filament\Admin\Resources\CategoryResource\Pages;
 use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -14,6 +15,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CategoryResource extends Resource
 {
+    use Translatable;
+
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-folder';
@@ -35,6 +38,7 @@ class CategoryResource extends Resource
                         Forms\Components\TextInput::make('name')
                             ->required()
                             ->maxLength(255)
+                            ->translatable()
                             ->label('Category Name')
                             ->placeholder('e.g. Stainless Steel Products'),
 
@@ -69,15 +73,18 @@ class CategoryResource extends Resource
                         Forms\Components\Textarea::make('description')
                             ->maxLength(500)
                             ->rows(3)
+                            ->translatable()
                             ->label('Description'),
 
                         Forms\Components\TextInput::make('meta_title')
                             ->maxLength(255)
+                            ->translatable()
                             ->label('Meta Title'),
 
                         Forms\Components\Textarea::make('meta_description')
                             ->maxLength(500)
                             ->rows(2)
+                            ->translatable()
                             ->label('Meta Description'),
                     ])
                     ->columns(1),

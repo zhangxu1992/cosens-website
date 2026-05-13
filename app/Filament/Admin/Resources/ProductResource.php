@@ -6,6 +6,7 @@ use App\Filament\Admin\Resources\ProductResource\Pages;
 use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -14,6 +15,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ProductResource extends Resource
 {
+    use Translatable;
+
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-cube';
@@ -40,6 +43,7 @@ class ProductResource extends Resource
                                         Forms\Components\TextInput::make('name')
                                             ->required()
                                             ->maxLength(255)
+                                            ->translatable()
                                             ->label('Product Name')
                                             ->placeholder('e.g. Stainless Steel Water Tank 1000L'),
 
@@ -100,12 +104,14 @@ class ProductResource extends Resource
                                         Forms\Components\Textarea::make('description')
                                             ->maxLength(1000)
                                             ->rows(3)
+                                            ->translatable()
                                             ->label('Short Description')
                                             ->placeholder('Brief product description for listing page...'),
 
                                         Forms\Components\RichEditor::make('content')
                                             ->fileAttachmentsDisk('public')
                                             ->fileAttachmentsDirectory('products/content')
+                                            ->translatable()
                                             ->label('Full Description')
                                             ->placeholder('Detailed product description...'),
                                     ]),
@@ -114,18 +120,21 @@ class ProductResource extends Resource
                                     ->schema([
                                         Forms\Components\Textarea::make('specifications')
                                             ->rows(5)
+                                            ->translatable()
                                             ->label('Specifications')
                                             ->helperText('One per line, format: Key: Value')
                                             ->placeholder("Material: Stainless Steel 304\nCapacity: 1000L\nThickness: 2mm\n..."),
 
                                         Forms\Components\Textarea::make('features')
                                             ->rows(5)
+                                            ->translatable()
                                             ->label('Key Features')
                                             ->helperText('One feature per line')
                                             ->placeholder("Corrosion resistant\nEasy to install\nLong service life\n..."),
 
                                         Forms\Components\Textarea::make('applications')
                                             ->rows(5)
+                                            ->translatable()
                                             ->label('Applications')
                                             ->helperText('One application per line')
                                             ->placeholder("Industrial water storage\nChemical processing\nFood & beverage industry\n..."),
@@ -178,17 +187,20 @@ class ProductResource extends Resource
                                     ->schema([
                                         Forms\Components\TextInput::make('meta_title')
                                             ->maxLength(255)
+                                            ->translatable()
                                             ->label('Meta Title')
                                             ->placeholder('Product Name | Cosens Industrial'),
 
                                         Forms\Components\Textarea::make('meta_description')
                                             ->maxLength(500)
                                             ->rows(2)
+                                            ->translatable()
                                             ->label('Meta Description')
                                             ->placeholder('Brief description for search engines...'),
 
                                         Forms\Components\TextInput::make('meta_keywords')
                                             ->maxLength(500)
+                                            ->translatable()
                                             ->label('Meta Keywords')
                                             ->placeholder('water tank, stainless steel, industrial...'),
                                     ])
